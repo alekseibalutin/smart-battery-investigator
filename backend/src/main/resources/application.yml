@@ -1,0 +1,43 @@
+
+spring:
+  application:
+    name: smart-battery-investigator
+  datasource:
+    url: jdbc:sqlite:smart-battery.db
+    driver-class-name: org.sqlite.JDBC
+    hikari:
+      maximum-pool-size: 1
+      connection-init-sql: PRAGMA foreign_keys=ON
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+
+server:
+  port: 8080
+
+app:
+  telemetry:
+    mode: windows
+    sampling-interval-ms: 5000
+    initial-delay-ms: 1000
+  process-filter:
+    minimum-cpu-percent: 0.5
+    minimum-memory-mb: 75
+    maximum-processes-per-sample: 80
+  analysis:
+    rolling-window-minutes: 5
+    historical-baseline-hours: 24
+    minimum-high-drain-percent-per-hour: 10.0
+    standard-deviation-multiplier: 1.5
+    minimum-baseline-windows: 3
+    interval-merge-gap-seconds: 30
+    process-baseline-minutes: 30
+    maximum-associated-processes: 10
+  demo:
+    random-seed: 42
+
+logging:
+  level:
+    root: INFO
+    com.alexbalutin.smartbattery: INFO

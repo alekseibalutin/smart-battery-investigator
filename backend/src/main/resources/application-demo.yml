@@ -1,0 +1,14 @@
+
+app:
+  telemetry:
+    mode: mock
+    sampling-interval-ms: 2000
+  analysis:
+    rolling-window-minutes: 1
+    minimum-high-drain-percent-per-hour: 10.0
+    standard-deviation-multiplier: 1.0
+    minimum-baseline-windows: 2
+
+logging:
+  level:
+    com.alexbalutin.smartbattery.telemetry.MockTelemetryProvider: INFO
